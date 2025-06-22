@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 기본 바디 스타일 - 다크모드 기본값 */
+body {
+  background-color: #0a192f;
+  color: #ccd6f6;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 라이트 모드 스타일 */
+html:not(.dark) body {
+  background-color: #fef7f0; /* 베이지 배경 */
+  color: #2b1e12; /* 짙은 브라운 텍스트 */
+}
+
+/* 링크 색상 - 다크 */
+a {
+  color: #64ffda;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #52d6b2;
+  text-decoration: underline;
+}
+/* 라이트 모드 링크 */
+html:not(.dark) a {
+  color: #f97316; /* 주황 */
+}
+html:not(.dark) a:hover {
+  color: #fb923c; /* 밝은 주황 */
+}
+
+/* 다크모드 링크 색상 */
+html.dark a {
+  color: #81ecec;
+}
+html.dark a:hover {
+  color: #74b9ff;
+}
+
+/* 코드 블럭 */
+pre,
+code {
+  font-family: 'Fira Code', monospace;
+  background-color: #112240;
+  color: #64ffda;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+/* 라이트 모드 코드 블럭 */
+html:not(.dark) pre,
+html:not(.dark) code {
+  background-color: #ffe3ca; /* 연한 베이지 */
+  color: #f97316; /* 주황 */
+}
+
+html.dark pre,
+html.dark code {
+  background-color: #1e1e1e;
+  color: #81ecec;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #64ffda;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: #81ecec;
+}
+/* 라이트 모드 스크롤바 */
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background-color: #f97316;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+/* 반응형 */
+@media (max-width: 640px) {
+  body {
+    padding: 0 12px;
+  }
+  a {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1280px) {
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
