@@ -29,14 +29,12 @@ pipeline {
     stage('Build Docker Image in Minikube') {
       steps {
         // Minikube Docker 환경 사용
-        sh 'eval $(minikube docker-env)'
-        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+        sh 'eval $(minikube docker-env) && docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
       }
     }
 
     stage('Deploy to Kubernetes') {
       steps {
-        // K8s 리소스 적용
         sh "kubectl apply -f ${K8S_DEPLOY_DIR}/deployment.yaml"
         sh "kubectl apply -f ${K8S_DEPLOY_DIR}/service.yaml"
       }
@@ -45,8 +43,10 @@ pipeline {
 
   post {
     success {
-      def minikubeIp = sh(script: "minikube ip", returnStdout: true).trim()
-      echo "✅ 배포 완료: http://${minikubeIp}:30080"
+      script {
+        def minikubeIp = sh(script: "minikube ip", returnStdout: true).trim()
+        echo "✅ 배포 완료: http://${minikubeIp}:30080"
+      }
     }
     failure {
       echo "❌ 배포 실패"
