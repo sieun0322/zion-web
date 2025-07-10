@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zion-next-app
+  labels:
+    app: zion-next-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zion-next-app
+  template:
+    metadata:
+      labels:
+        app: zion-next-app
+    spec:
+      containers:
+        - name: zion-next-app
+          image: zionlee/zion-next-app:latest  # Jenkins 또는 GitHub Action에서 푸시된 이미지
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
