@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/sieun0322/zion-web.git // 수정 필요
+        git 'https://github.com/sieun0322/zion-web.git'
       }
     }
 
