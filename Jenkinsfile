@@ -5,6 +5,7 @@ pipeline {
     IMAGE_NAME = "zion-next-app"
     IMAGE_TAG = "latest"
     K8S_DEPLOY_DIR = "k8s"
+    PATH = "/Users/apple/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
   }
 
   stages {
@@ -32,7 +33,8 @@ pipeline {
 
     stage('Build Docker Image in Minikube') {
       steps {
-        // Minikube Docker 환경 사용
+        sh 'which minikube'
+        sh 'which docker'
         sh 'eval $(minikube docker-env) && docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
       }
     }
