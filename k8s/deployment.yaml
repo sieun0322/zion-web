@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: zion-next-app
-          image: zionlee/zion-next-app:latest  # Jenkins 또는 GitHub Action에서 푸시된 이미지
+          image: zion322/zion-next-app:latest  # Jenkins 또는 GitHub Action에서 푸시된 이미지
           ports:
             - containerPort: 3000
           env:
