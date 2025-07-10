@@ -45,7 +45,8 @@ pipeline {
 
   post {
     success {
-      echo "✅ 배포 완료: http://$(minikube ip):30080"
+      def minikubeIp = sh(script: "minikube ip", returnStdout: true).trim()
+      echo "✅ 배포 완료: http://${minikubeIp}:30080"
     }
     failure {
       echo "❌ 배포 실패"
