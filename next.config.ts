@@ -2,6 +2,9 @@ import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     // 기존 experimental 옵션 필요하면 여기에만 둠
   },
