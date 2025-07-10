@@ -10,7 +10,13 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/sieun0322/zion-web.git'
+        checkout([
+          $class: 'GitSCM',
+          branches: [[name: '*/main']],
+          userRemoteConfigs: [[
+            url: 'https://github.com/sieun0322/zion-web.git'
+          ]]
+        ])
       }
     }
 
