@@ -1,30 +1,54 @@
 pipeline {
   agent any
 
+  environment {
+    IMAGE_NAME = "zion-next-app"
+    IMAGE_TAG = "latest"
+    K8S_DEPLOY_DIR = "k8s"
+  }
+
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/sieun0322/zion-web.git'
+        git 'https://github.com/sieun0322/zion-web.git // 수정 필요
       }
     }
 
-    stage('Build Docker Image') {
+    stage('Install Dependencies') {
       steps {
-        script {
-          sh 'docker build -t zion-next-app:latest .'
-        }
+        sh 'npm install'
       }
     }
 
-    stage('Deploy to Minikube') {
+    stage('Build Next.js App') {
       steps {
-        withKubeConfig(credentialsId: 'kubeconfig') {
-          sh '''
-            kubectl apply -f k8s/deployment.yaml
-            kubectl apply -f k8s/service.yaml
-          '''
-        }
+        sh 'npm run build'
       }
+    }
+
+    stage('Build Docker Image in Minikube') {
+      steps {
+        // Minikube Docker 환경 사용
+        sh 'eval $(minikube docker-env)'
+        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+      }
+    }
+
+    stage('Deploy to Kubernetes') {
+      steps {
+        // K8s 리소스 적용
+        sh "kubectl apply -f ${K8S_DEPLOY_DIR}/deployment.yaml"
+        sh "kubectl apply -f ${K8S_DEPLOY_DIR}/service.yaml"
+      }
+    }
+  }
+
+  post {
+    success {
+      echo "✅ 배포 완료: http://$(minikube ip):30080"
+    }
+    failure {
+      echo "❌ 배포 실패"
     }
   }
 }
