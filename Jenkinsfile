@@ -5,7 +5,7 @@ pipeline {
     IMAGE_NAME = "zion-next-app"
     IMAGE_TAG = "latest"
     K8S_DEPLOY_DIR = "k8s"
-    PATH = "/Users/apple/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    PATH = "/Users/apple/node/bin:/Users/apple/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
   }
 
   stages {
