@@ -19,7 +19,7 @@ pipeline {
         sh '''
           rm -rf node_modules package-lock.json .next
           npm cache clean --force
-          npm ci
+          npm install
         '''
       }
     }
@@ -29,7 +29,7 @@ pipeline {
         sh 'npm run build'
       }
     }
-    
+
     stage('Build Docker Image in Minikube') {
       steps {
         // Minikube Docker 환경 사용
