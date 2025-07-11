@@ -17,8 +17,9 @@ spec:
       containers:
         - name: zion-next-app
           image: zion-next-app:latest  # Jenkins 또는 GitHub Action에서 푸시된 이미지
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
           env:
             - name: NODE_ENV
-              value: production
+              value: productionv
