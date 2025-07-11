@@ -43,6 +43,7 @@ pipeline {
       steps {
         sh "kubectl apply -f ${K8S_DEPLOY_DIR}/deployment.yaml"
         sh "kubectl apply -f ${K8S_DEPLOY_DIR}/service.yaml"
+        sh "kubectl apply -f ${K8S_DEPLOY_DIR}/ingress.yaml"
       }
     }
   }
