@@ -43,7 +43,6 @@ pipeline {
       steps {
         sh "kubectl apply -f ${K8S_DEPLOY_DIR}/deployment.yaml"
         sh "kubectl apply -f ${K8S_DEPLOY_DIR}/service.yaml"
-        sh "kubectl apply -f ${K8S_DEPLOY_DIR}/ingress.yaml"
       }
     }
   }
@@ -52,7 +51,7 @@ pipeline {
     success {
       script {
         def minikubeIp = sh(script: "minikube ip", returnStdout: true).trim()
-        echo "✅ 배포 완료: http://${minikubeIp}:30080"
+        echo "✅ 배포 완료: http://zionlee.website"
       }
     }
     failure {
