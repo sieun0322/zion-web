@@ -1,28 +1,33 @@
 'use client';
-
+import { usePathname } from 'next/navigation';
 import DarkModeToggle from './DarkModeToggle';
+import Link from 'next/link';
 
 const navItems = [
-  { name: 'Home', to: 'hero' },
   { name: 'About', to: 'about' },
   { name: 'Projects', to: 'projects' },
   { name: 'Contact', to: 'contact' },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const isHome = pathname === '/';
   return (
     <nav className="bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text fixed w-full z-50 shadow-md">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* 로고 */}
-        <a
-          href="#hero"
+        <Link href="/"
           className="text-xl font-bold text-light-accent dark:text-dark-accent"
         >
-          Zion Lee
-        </a>
+          Home
+        </Link>
 
         {/* 메뉴 */}
+
+        {isHome && (
         <ul className="flex flex-grow justify-end space-x-12 text-sm font-semibold items-center">
+
   {navItems.map((item) => (
     <li key={item.to} className="w-auto inline-block">
       <a
@@ -37,7 +42,7 @@ export default function Navbar() {
     <DarkModeToggle />
   </li>
 </ul>
-
+)}
       </div>
     </nav>
   );

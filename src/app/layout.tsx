@@ -1,9 +1,7 @@
 // app/layout.tsx
-import './styles/globals.css'; // Tailwind CSS 전역 스타일 임포트
+import '@/styles/globals.css'; // Tailwind CSS 전역 스타일 임포트
 import Navbar from '../components/Navbar';
 import { Inter } from 'next/font/google';
-import { Playfair_Display } from 'next/font/google';
-const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700'] });
 const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'Zion Lee Portfolio',

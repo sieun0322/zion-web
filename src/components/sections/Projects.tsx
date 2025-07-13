@@ -1,33 +1,10 @@
 'use client';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
-type Project = {
-  title: string;
-  description: string;
-  tech: string[];
-  link?: string;
-  github?: string;
-};
-
-const projects: Project[] = [
-  {
-    title: 'VoicePlayer',
-    description:
-      'React Native 기반 음성 녹음/재생 UI 컴포넌트로 부드러운 사용자 경험 제공.',
-    tech: ['React Native', 'TypeScript', 'Expo'],
-    github: 'https://github.com/sieun0322/voiceplayer',
-  },
-  {
-    title: 'Zionlee Website',
-    description:
-      'Next.js와 Tailwind CSS를 사용한 퍼스널 포트폴리오 사이트. Mac mini 서버에서 직접 호스팅.',
-    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-    link: 'https://zionlee.website',
-    github: 'https://github.com/sieun0322/portfolio',
-  },
-];
-
+import { projects } from '@/lib/projects';
 export default function Projects() {
+  const router = useRouter();
   return (
     <section
       id="projects"
@@ -53,6 +30,7 @@ export default function Projects() {
             viewport={{ once: true }}
             className="relative bg-light-soft rounded-lg p-8 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer group
                        dark:bg-[#112240]"
+                       onClick={() => router.push(`/projects/${project.slug}`)}
           >
             {/* 프로젝트 번호 */}
             <span className="absolute top-6 left-6 font-mono text-sm select-none opacity-30 text-light-accent dark:text-dark-accent">
@@ -63,7 +41,7 @@ export default function Projects() {
             <h3 className="text-2xl font-semibold mb-3 text-light-text group-hover:text-light-accent transition
                            dark:text-dark-text dark:group-hover:text-dark-accent"
             >
-              {project.title}
+              {project.name}
             </h3>
 
             {/* 프로젝트 설명 */}
@@ -88,11 +66,13 @@ export default function Projects() {
             {/* 링크 버튼 */}
             <div className="flex gap-6 text-sm font-mono text-light-accent dark:text-dark-accent">
               {project.github && (
+                
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-light-bg dark:hover:text-dark-bg"
+                  onClick={e => e.stopPropagation()}
                 >
                   GitHub →
                 </a>
@@ -103,8 +83,31 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-light-bg dark:hover:text-dark-bg"
+                  onClick={e => e.stopPropagation()}
                 >
                   Live Site →
+                </a>
+              )}
+              {project.android && (
+                <a
+                  href={project.android}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-light-bg dark:hover:text-dark-bg"
+                  onClick={e => e.stopPropagation()}
+                >
+                  Android →
+                </a>
+              )}
+              {project.ios && (
+                <a
+                  href={project.ios}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-light-bg dark:hover:text-dark-bg"
+                  onClick={e => e.stopPropagation()}
+                >
+                  iOS →
                 </a>
               )}
             </div>

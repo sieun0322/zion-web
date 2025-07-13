@@ -1,8 +1,7 @@
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import Contact from '../components/Contact';
-import Projects from '../components/Projects';
-import About from '../components/About';
+import Hero from '../components/sections/Hero';
+import Contact from '../components/sections/Contact';
+import Projects from '../components/sections/Projects';
+import About from '../components/sections/About';
 
 export default function HomePage() {
   return (

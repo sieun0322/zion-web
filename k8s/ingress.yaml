@@ -5,6 +5,11 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - zion.home
+    secretName: zion-tls
   rules:
     - host: localhost
       http:

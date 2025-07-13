@@ -1,6 +1,9 @@
 import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  images: {
+    domains: [], // 외부 URL 사용하는 경우만 필요
+  },
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,

@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import SectionTitle from '@/components/ui/SectionTitle';
-import Tag from './ui/Tag';
+import Tag from '../ui/Tag';
 
 export default function About() {
   return (
