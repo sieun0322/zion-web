@@ -6,18 +6,20 @@ Mac Mini (Late 2012)를 활용해 **Kubernetes (Minikube)**, **Jenkins**, **Ngin
 ---
 
 ## ⚙️ Architecture
-GitHub Push
-↓
-Jenkins (Git Pull → Docker Build → kubectl apply)
-↓
-Minikube (Kubernetes Cluster)
-↓
-Nginx (Reverse Proxy)
-↓
-Cloudflare Tunnel
-↓
+GitHub Push<br/>
+↓<br/>
+Jenkins (Git Pull → Docker Build → kubectl apply)<br/>
+↓<br/>
+Minikube (Kubernetes Cluster)<br/>
+↓<br/>
+Nginx (Reverse Proxy)<br/>
+↓<br/>
+Cloudflare Tunnel<br/>
+↓<br/>
 https://zionlee.website
 
+
+<img src="https://github.com/sieun0322/zion-web/blob/main/public/images/p2_architecture.png?raw=true"/>
 ---
 
 ## 🛠️ Tech Stack
