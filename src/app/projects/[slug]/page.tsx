@@ -4,10 +4,10 @@
 import {  use } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-import dynamic from 'next/dynamic';
 import { projects } from '@/lib/projects';
 import ProjectCarousel from '@/components/ProjectCarousel';
 export default function ProjectDetail({
@@ -143,12 +143,12 @@ export default function ProjectDetail({
         )}
       </div>
 
-      <a
+      <Link
         href="/#projects"
         className="block mt-12 text-light-accent underline hover:text-light-bg dark:text-dark-accent dark:hover:text-dark-bg transition"
       >
         ← Back to Projects
-      </a>
+      </Link>
     </main>
   );
 }
