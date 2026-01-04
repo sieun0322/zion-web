@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: zion-next-app
-          image: zion-next-app:latest  # Jenkins 또는 GitHub Action에서 푸시된 이미지
+          image: zion-next-app:latest  # Jenkins에서 자동으로 커밋 해시로 업데이트됨
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

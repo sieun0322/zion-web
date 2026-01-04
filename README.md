@@ -25,6 +25,24 @@ docs: update README installation steps
 
 ---
 
+## 🚀 배포 시스템
+
+### 버전 관리
+- **이미지 태그**: Git 커밋 해시 기반 (예: `zion-next-app:abc1234`)
+- **자동 배포**: Jenkins가 커밋마다 새 버전으로 배포
+- **롤백 지원**: 이전 버전으로 즉시 복원 가능
+
+### 롤백 방법
+```bash
+# 특정 커밋으로 롤백
+./scripts/rollback.sh <commit-hash>
+
+# 예시
+./scripts/rollback.sh abc1234
+```
+
+---
+
 ## ⚙️ Architecture
 GitHub Push<br/>
 ↓<br/>

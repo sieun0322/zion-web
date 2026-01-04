@@ -8,15 +8,21 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Docker 빌드 최적화
+  output: 'standalone',
+  
+  // 빌드 성능 향상
+  swcMinify: true,
+  
   experimental: {
-    // 기존 experimental 옵션 필요하면 여기에만 둠
+    // 메모리 사용량 최적화
+    optimizePackageImports: ['framer-motion', 'react-icons'],
   },
-  turbopack: {}, // turbopack 사용 여부: 필요에 따라 true/false
-  // 또는
-  // turbopack: {
-  //   // turbopack 설정 옵션들
-  // },
-  // appDir는 기본 활성화됨으로 삭제
+  
+  // 개발 환경에서만 turbopack 사용
+  ...(process.env.NODE_ENV === 'development' && {
+    turbopack: {}
+  }),
 };
 
 export default nextConfig;
