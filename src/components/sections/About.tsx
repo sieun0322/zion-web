@@ -19,12 +19,17 @@ export default function About() {
         className="space-y-4 text-lg leading-relaxed text-light-subtle dark:text-dark-subtle"
       >
         <p>
-          안녕하세요! 저는{' '}
+          안녕하세요! 저는{' '} 웹 개발자,
           <span className="text-light-accent dark:text-dark-accent font-semibold">
-            Zion Lee
+            이시은
           </span>
-          입니다. 웹 기술과 서버 인프라에 관심이 많고, React와 Next.js를 중심으로
-          사용자 중심의 인터랙티브한 웹사이트를 만드는 것을 좋아합니다.
+          입니다. 
+        </p>
+        <p>
+         Spring/React 기반 환경에서 설계, 개발, CI/CD, 운영까지 웹 시스템의 전 과정을 직접 경험했으며,유지보수와 확장성이 뛰어난 시스템 설계와, 누구나 이해하기 쉬운 클린 코드 작성을 중요하게 생각합니다.
+        </p>
+        <p>
+          호기심과 학습에 대한 열정이 커, 꾸준히 새로운 기술을 학습하며 기술 스펙트럼을 넓혔고, 3년 넘게 앱 개발 프로젝트에도 참여하면서 실전 중심의 개발 역량을 키워가고 있습니다.
         </p>
         <p>
           최근에는{' '}
@@ -33,15 +38,15 @@ export default function About() {
           </span>
           를 활용하여 포트폴리오와 실험적인 웹 프로젝트를 직접 배포하고 있어요.
         </p>
+
         <p>아래는 제가 주로 사용하는 기술 스택입니다:</p>
 
         <ul className="grid grid-cols-2 gap-3 mt-4">
   {[
-    'JavaScript (ES6+)',
+    'Java',
     'React / Next.js',
-    'Tailwind CSS',
-    'Framer Motion',
-    'Node.js / Express',
+    'Spring Boot',
+    'Spring Batch',
     'Docker / Nginx',
   ].map((tech, index) => (
     <li key={index}>

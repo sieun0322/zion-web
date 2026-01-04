@@ -4,8 +4,8 @@ import Navbar from '../components/Navbar';
 import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
-  title: 'Zion Lee Portfolio',
-  description: 'Personal portfolio website of Zion Lee - Web Developer',
+  title: 'Sieun Lee Portfolio',
+  description: 'Personal portfolio website of Sieun Lee - Web Developer',
   viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: '/favicon.ico',

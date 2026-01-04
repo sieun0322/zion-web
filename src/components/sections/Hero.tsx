@@ -23,7 +23,7 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
         className="text-4xl sm:text-6xl font-bold text-light-text dark:text-dark-text"
       >
-        Zion Lee.
+        Sieun Lee.
       </motion.h1>
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
