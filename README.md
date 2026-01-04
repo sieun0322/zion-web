@@ -5,11 +5,23 @@ Mac Mini (Late 2012)를 활용해 **Kubernetes (Minikube)**, **Jenkins**, **Ngin
 
 ## 🔧 Git Hooks (Husky)
 
-이 프로젝트는 [Husky](https://typicode.github.io/husky/)를 사용해 push 전에 자동으로 빌드와 린트 검사를 수행합니다.  
+이 프로젝트는 [Husky](https://typicode.github.io/husky/)를 사용해 코드 품질을 자동으로 검증합니다.  
 `npm install` 실행 시 자동으로 설치됩니다.
 
+- **commit-msg**: [Conventional Commits](https://www.conventionalcommits.org/) 형식 검증
 - **pre-push**: 빌드 및 린트 검사 실행
-- 모든 검사가 통과해야 push 진행
+
+### 커밋 메시지 형식
+```
+type(scope): description
+
+예시:
+feat(auth): add user login functionality
+fix(ui): resolve button alignment issue
+docs: update README installation steps
+```
+
+**허용된 타입**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`, `build`
 
 ---
 

@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Conventional Commits format 확인
+# 형식: type(scope): description
+# 예시: feat(auth): add user login functionality
+
+commit_msg=$(cat "$1")
+
+# 커밋 메시지 형식 검증
+commit_pattern="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\(.+\))?: .{1,50}"
+
+if [[ ! $commit_msg =~ $commit_pattern ]]; then
+    echo "❌ 커밋 메시지 형식이 올바르지 않습니다!"
+    echo ""
+    echo "올바른 형식:"
+    echo "  type(scope): description"
+    echo ""
+    echo "허용된 타입:"
+    echo "  • feat:     새로운 기능"
+    echo "  • fix:      버그 수정"
+    echo "  • docs:     문서 변경"
+    echo "  • style:    코드 스타일 (포맷, 세미콜론 등)"
+    echo "  • refactor: 리팩토링"
+    echo "  • perf:     성능 개선"
+    echo "  • test:     테스트 추가/수정"
+    echo "  • chore:    빌드, 패키지 매니저 설정 등"
+    echo "  • ci:       CI 설정"
+    echo "  • build:    빌드 시스템 변경"
+    echo ""
+    echo "예시:"
+    echo "  feat(auth): add user login functionality"
+    echo "  fix(ui): resolve button alignment issue"
+    echo "  docs: update README installation steps"
+    echo ""
+    echo "현재 메시지: '$commit_msg'"
+    exit 1
+fi
+
+echo "✅ 커밋 메시지 형식이 올바릅니다!"
