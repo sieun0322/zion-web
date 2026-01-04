@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔨 Running build check..."
+npm run build || exit 1
+
+echo "🧹 Running lint check..."
+npm run lint || exit 1
+
+echo "✅ All checks passed!"
