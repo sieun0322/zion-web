@@ -15,6 +15,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: '/auth/unauthorized',
   },
   callbacks: {
+    authorized({ auth, request }) {
+      const isLoggedIn = !!auth?.user;
+      const isProtectedRoute = request.nextUrl.pathname.startsWith('/splendor');
+
+      if (isProtectedRoute && !isLoggedIn) {
+        return false; // redirect to signIn page
+      }
+      return true;
+    },
     async signIn({ user }) {
       const email = user.email?.toLowerCase();
       console.log(email);
