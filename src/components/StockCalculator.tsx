@@ -27,6 +27,11 @@ export default function StockCalculator() {
   const [isSaving, setIsSaving] = useState(false);
   const [sellingId, setSellingId] = useState<number | null>(null);
   const [sellingPrice, setSellingPrice] = useState('');
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editSymbol, setEditSymbol] = useState('');
+  const [editBuyPrice, setEditBuyPrice] = useState('');
+  const [editQuantity, setEditQuantity] = useState('');
+  const [editSellingPrice, setEditSellingPrice] = useState('');
 
   const loadStocks = useCallback(async () => {
     try {
@@ -149,6 +154,65 @@ export default function StockCalculator() {
     } catch (error) {
       console.error('Failed to sell stock:', error);
       alert('판매 처리에 실패했습니다.');
+    }
+  };
+
+  const startEdit = (entry: StockEntry) => {
+    setEditingId(entry.id);
+    setEditSymbol(entry.symbol);
+    setEditBuyPrice(entry.buyPrice.toString());
+    setEditQuantity(entry.quantity.toString());
+    setEditSellingPrice(entry.sellingPrice?.toString() || '');
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditSymbol('');
+    setEditBuyPrice('');
+    setEditQuantity('');
+    setEditSellingPrice('');
+  };
+
+  const saveEdit = async (id: number, status: 'HOLDING' | 'SOLD') => {
+    if (!editSymbol || !editBuyPrice || !editQuantity) return;
+
+    try {
+      const updateData: Record<string, unknown> = {
+        id,
+        symbol: editSymbol.toUpperCase(),
+        purchase_price: parseFloat(editBuyPrice),
+        quantity: parseFloat(editQuantity),
+      };
+
+      if (status === 'SOLD' && editSellingPrice) {
+        updateData.selling_price = parseFloat(editSellingPrice);
+      }
+
+      const res = await fetch('/api/stocks', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updateData),
+      });
+
+      if (!res.ok) throw new Error('Failed to update stock');
+
+      setEntries(
+        entries.map((e) =>
+          e.id === id
+            ? {
+                ...e,
+                symbol: editSymbol.toUpperCase(),
+                buyPrice: parseFloat(editBuyPrice),
+                quantity: parseFloat(editQuantity),
+                sellingPrice: status === 'SOLD' && editSellingPrice ? parseFloat(editSellingPrice) : e.sellingPrice,
+              }
+            : e
+        )
+      );
+      cancelEdit();
+    } catch (error) {
+      console.error('Failed to update stock:', error);
+      alert('수정에 실패했습니다.');
     }
   };
 
@@ -366,6 +430,12 @@ export default function StockCalculator() {
                       </span>
                     )}
                     <button
+                      onClick={() => startEdit(entry)}
+                      className="px-3 py-1 text-sm bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                    >
+                      수정
+                    </button>
+                    <button
                       onClick={() => removeEntry(entry.id)}
                       className="px-3 py-1 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                     >
@@ -401,6 +471,67 @@ export default function StockCalculator() {
                           setSellingId(null);
                           setSellingPrice('');
                         }}
+                        className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
+                      >
+                        취소
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* 수정 폼 */}
+                {editingId === entry.id && (
+                  <div className="mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">종목 정보 수정</p>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">종목 코드</label>
+                        <input
+                          type="text"
+                          value={editSymbol}
+                          onChange={(e) => setEditSymbol(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-light-text dark:text-dark-text text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">총 매수금액</label>
+                        <input
+                          type="number"
+                          value={editBuyPrice}
+                          onChange={(e) => setEditBuyPrice(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-light-text dark:text-dark-text text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">수량</label>
+                        <input
+                          type="number"
+                          value={editQuantity}
+                          onChange={(e) => setEditQuantity(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-light-text dark:text-dark-text text-sm"
+                        />
+                      </div>
+                      {entry.status === 'SOLD' && (
+                        <div>
+                          <label className="block text-xs text-gray-500 mb-1">총 판매금액</label>
+                          <input
+                            type="number"
+                            value={editSellingPrice}
+                            onChange={(e) => setEditSellingPrice(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-light-text dark:text-dark-text text-sm"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => saveEdit(entry.id, entry.status)}
+                        className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                      >
+                        저장
+                      </button>
+                      <button
+                        onClick={cancelEdit}
                         className="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
                       >
                         취소
