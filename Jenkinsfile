@@ -20,16 +20,6 @@ pipeline {
       }
     }
 
-    stage('Install Dependencies') {
-      steps {
-        sh '''
-          rm -rf node_modules package-lock.json .next
-          npm cache clean --force
-          npm install
-        '''
-      }
-    }
-
     stage('Build Next.js App') {
       steps {
         sh 'npm run build'
