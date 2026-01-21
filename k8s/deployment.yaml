@@ -23,3 +23,41 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            # Secret에서 값 불러오기
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: splendor-secrets
+                  key: GOOGLE_CLIENT_ID
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: splendor-secrets
+                  key: GOOGLE_CLIENT_SECRET
+            - name: ALLOWED_EMAILS
+              valueFrom:
+                secretKeyRef:
+                  name: splendor-secrets
+                  key: ALLOWED_EMAILS
+            - name: AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: splendor-secrets
+                  key: NEXTAUTH_SECRET
+            - name: NEXTAUTH_URL
+              value: "https://zionlee.website"
+            - name: CLOUDFLARE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: d1-secrets
+                  key: CLOUDFLARE_ACCOUNT_ID
+            - name: CLOUDFLARE_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: d1-secrets
+                  key: CLOUDFLARE_API_TOKEN
+            - name: D1_DATABASE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: d1-secrets
+                  key: D1_DATABASE_ID
