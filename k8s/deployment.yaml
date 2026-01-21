@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: splendor-secrets
-                  key: NEXTAUTH_SECRET
+                  key: AUTH_SECRET
             - name: NEXTAUTH_URL
               value: "https://zionlee.website"
             - name: CLOUDFLARE_ACCOUNT_ID
