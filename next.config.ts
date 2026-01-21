@@ -10,10 +10,7 @@ const nextConfig: NextConfig = {
   },
   // Docker 빌드 최적화
   output: 'standalone',
-  
-  // 빌드 성능 향상
-  swcMinify: true,
-  
+
   experimental: {
     // 메모리 사용량 최적화
     optimizePackageImports: ['framer-motion', 'react-icons'],
